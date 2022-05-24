@@ -7,6 +7,8 @@
   <strong>Images:</strong>
   <% post.images.each do |image|%>
   <%=image_tag image,style: "height:10vw;width:10vw;" if post.images.attached?%>
+  <%=link_to "Show",url_for(image)%>
+  <%= link_to 'download', rails_blob_path(image, disposition: "attachment") %>
   <%end%>
   </p>
   <p>
