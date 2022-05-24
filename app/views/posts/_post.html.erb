@@ -12,6 +12,18 @@
   <%end%>
   </p>
   <p>
+  <strong>files:</strong>
+  <% if post.files.attached? %>
+  <% post.files.each do |f|%>
+  <%=f.id%>
+  <%=link_to "Show",url_for(f)%>
+  <%= link_to 'download', rails_blob_path(f, disposition: "attachment") %>
+  <%end%>
+  <%else%>
+  <p>No docs attached</p>
+  <%end%>
+  </p>
+  <p>
     <strong>Body:</strong>
     <%= post.body %>
   </p>
