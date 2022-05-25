@@ -56,7 +56,11 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def delete_from_attached
+    a=ActiveStorage::Attachment.find(params[:image])
+    a.purge
+    redirect_to root_path
+end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

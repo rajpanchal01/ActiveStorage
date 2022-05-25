@@ -9,15 +9,19 @@
   <%=image_tag image,style: "height:10vw;width:10vw;" if post.images.attached?%>
   <%=link_to "Show",url_for(image)%>
   <%= link_to 'download', rails_blob_path(image, disposition: "attachment") %>
+  <%= link_to 'delete',delete_from_attached_path(image: image)%>
   <%end%>
   </p>
   <p>
   <strong>files:</strong>
   <% if post.files.attached? %>
-  <% post.files.each do |f|%>
-  <%=f.id%>
-  <%=link_to "Show",url_for(f)%>
-  <%= link_to 'download', rails_blob_path(f, disposition: "attachment") %>
+  <% post.files.each do |file|%>
+  <%=file.filename%>
+  <%if file.previewable?%>
+  <%=image_tag file.preview(resize: "200x200")%>
+  <%end%>
+  <%=link_to "Show",url_for(file)%>
+  <%= link_to 'download', rails_blob_path(file, disposition: "attachment") %>
   <%end%>
   <%else%>
   <p>No docs attached</p>
